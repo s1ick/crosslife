@@ -1,0 +1,132 @@
+@use '@angular/material' as mat;
+@import "reset-css/reset.css";
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+@import 'assets/variables.scss';
+
+
+@include mat.core();
+$crossLife-primary: mat.define-palette(mat.$grey-palette, 800);
+$crossLife-accent: mat.define-palette(mat.$orange-palette, 700);
+$crossLife-warn: mat.define-palette(mat.$red-palette);
+
+$crossLife-theme: mat.define-light-theme((
+  color: (
+    primary: $crossLife-primary,
+    accent: $crossLife-accent,
+    warn: $crossLife-warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: '"SF Pro Display", sans-serif;'
+  ),
+  density: 0
+));
+
+@include mat.all-component-themes($crossLife-theme);
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  background: rgb(30, 30, 30);
+  --mat-form-field-container-height: 32px;
+  --mdc-checkbox-selected-checkmark-color: #fff;
+  --mdc-checkbox-unselected-icon-color: var(--color-muted);
+  --mdc-checkbox-unselected-hover-icon-color: var(--color-muted);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+}
+
+.select-wrapper {
+  display: block;
+  animation: swipeIn 0.3s ease-out;
+}
+
+@keyframes swipeIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.search {
+  width: 100%;
+  border-radius: 8px;
+  background: var(--color-dark);
+  padding-left: 12px;
+  margin-bottom: 16px;
+
+  mat-icon {
+    color: var(--color-muted);
+  }
+
+  input {
+    color: var(--color-muted);
+    font-size: var(--fsz-medium);
+    font-weight: var(--font-weight-normal);
+    line-height: 20px;
+    letter-spacing: -0.41px;
+    text-align: left;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    background: transparent !important;
+    border-radius: 8px;
+  }
+
+  .mdc-notched-outline {
+    border-color: var(--color-dark) !important;
+  }
+
+  .mdc-notched-outline__leading,
+  .mat-mdc-form-field-subscript-wrapper,
+  .mat-mdc-form-field-bottom-align::before,
+  .mdc-notched-outline__trailing {
+    display: none; 
+  }
+
+  .mdc-text-field--outlined .mat-mdc-form-field-infix,
+  .mdc-text-field--no-label .mat-mdc-form-field-infix {
+    --mat-form-field-container-vertical-padding: 0;
+    line-height: 32px;
+    color: var(--color-muted);
+  }
+
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    --mdc-outlined-text-field-input-text-color: var(--color-muted);
+
+    &::-webkit-input-placeholder {
+      color: var(--color-muted);
+    }
+
+    &:-moz-placeholder {
+      color: var(--color-muted);
+      opacity: 1;
+    }
+
+    &::-moz-placeholder {
+      color: var(--color-muted);
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--color-muted);
+    }
+  }
+
+  .mat-mdc-form-field-icon-prefix > .mat-icon, 
+  .mat-mdc-form-field-icon-suffix > .mat-icon {
+    padding: 0;
+  }
+}
+
+.material-icons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}

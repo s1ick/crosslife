@@ -1,0 +1,30 @@
+.title {
+  margin-bottom: 22px;
+  color: #fff;
+  font-size: var(--fsz-medium);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+}
+
+.description-select {
+  color: #fff;
+  font-size: var(--fsz-large);
+  font-weight: var(--font-weight-bold);
+  line-height: 22px;
+  letter-spacing: -0.41px;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.layout {
+  padding: 0 16px;
+}
+
+.footer__description {
+  color: #fff;
+  text-align: center;
+  font-size: var(--fsz-large);
+}

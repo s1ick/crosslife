@@ -1,0 +1,23 @@
+.tips-wrapper {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+}
+.tips {
+  border-radius: 13px;
+  background: var(--color-dark);
+  color: #fff;
+  font-size: var(--fsz-small);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  letter-spacing: -0.41px;
+  text-align: center;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  padding: 4px 8px 4px 8px;
+  white-space: nowrap;
+}
