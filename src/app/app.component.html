@@ -1,32 +1,35 @@
 <div class="layout">
   <div class="title">Добавить отчет</div>
-  <div class="description-select">*Выберите не менее двух регионов</div>
-
   <ng-container *ngIf="!isSelectVisible">
+    <div class="description-select">*Выберите не менее двух регионов</div>
     <div *ngIf="region1Tip.length > 0" class="selected-tags">
       <app-tips [tips]="region1Tip" (removeTagEvent)="removeTag(1, $event)"></app-tips>
     </div>
     <app-buttons textButtons="Выбрать" typeIcon="button-secondary" (click)="toggleSelectType(true, 1)">
     </app-buttons>
-
     <div class="description-select">*Выберите один регион из списка</div>
-
     <div *ngIf="region2Tip.length > 0" class="selected-tags">
       <app-tips [tips]="region2Tip" (removeTagEvent)="removeTag(2, $event)"></app-tips>
     </div>
-
     <app-buttons textButtons="Выбрать" typeIcon="button-secondary" (click)="toggleSelectType(false, 2)">
     </app-buttons>
   </ng-container>
 
   <div *ngIf="isSelectVisible" class="select-wrapper">
-    <select-component [items]="items" [isMultiple]="isMultiple"
-      (selectedItemsChange)="onSelectionChange($event, isMultiple ? 1 : 2)" (goBackEvent)="onGoBack()">
-    </select-component>
+    <div *ngIf="isFirstRegionSelected">
+      <select-component [items]="items" [isMultiple]="isMultiple" [selectedItems]="selectedRegions.region1"
+        (selectedItemsChange)="onSelectionChange($event, 1)" (goBackEvent)="onGoBack()"></select-component>
+    </div>
+
+    <div *ngIf="isSecondRegionSelected">
+      <select-component [items]="items" [isMultiple]="isMultiple" [selectedItems]="selectedRegions.region2"
+        (selectedItemsChange)="onSelectionChange($event, 2)" (goBackEvent)="onGoBack()"></select-component>
+    </div>
   </div>
-  <footer *ngIf="!isSelectVisible" class="footer">
-    <div class="footer__description">Нужно заполнить поля отмеченные*</div>
-    <app-buttons [disabled]="!isFormValid" typeIcon="button-primary" textButtons="Добавить отчет"
-      (click)="generateReport()"></app-buttons>
-  </footer>
 </div>
+
+<footer *ngIf="!isSelectVisible" class="footer">
+  <div class="footer__description">Нужно заполнить поля отмеченные*</div>
+  <app-buttons [disabled]="!isFormValid" typeIcon="button-primary" textButtons="Добавить отчет"
+    (click)="generateReport()"></app-buttons>
+</footer>

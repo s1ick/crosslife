@@ -1,28 +1,8 @@
-@use '@angular/material' as mat;
 @import "reset-css/reset.css";
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-@import 'assets/variables.scss';
+@import 'assets/variables.scss';  // Ваша палитра и переменные
 
-
-@include mat.core();
-$crossLife-primary: mat.define-palette(mat.$grey-palette, 800);
-$crossLife-accent: mat.define-palette(mat.$orange-palette, 700);
-$crossLife-warn: mat.define-palette(mat.$red-palette);
-
-$crossLife-theme: mat.define-light-theme((
-  color: (
-    primary: $crossLife-primary,
-    accent: $crossLife-accent,
-    warn: $crossLife-warn,
-  ),
-  typography: mat.define-typography-config(
-    $font-family: '"SF Pro Display", sans-serif;'
-  ),
-  density: 0
-));
-
-@include mat.all-component-themes($crossLife-theme);
-
+/* Убираем Material */
 html,
 body {
   height: 100%;
@@ -30,10 +10,7 @@ body {
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-normal);
   background: rgb(30, 30, 30);
-  --mat-form-field-container-height: 32px;
-  --mdc-checkbox-selected-checkmark-color: #fff;
-  --mdc-checkbox-unselected-icon-color: var(--color-muted);
-  --mdc-checkbox-unselected-hover-icon-color: var(--color-muted);
+
 }
 
 h1, h2, h3, h4, h5, h6 {

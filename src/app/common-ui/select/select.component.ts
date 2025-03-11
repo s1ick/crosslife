@@ -19,11 +19,12 @@ import { MatInputModule } from '@angular/material/input';
 export class SelectComponent {
   @Input() items: any[] = [];
   @Input() isMultiple: boolean = false;
+  @Input() selectedItems: any[] = []; 
+
   @Output() selectedItemsChange = new EventEmitter<any[]>();
+  @Output() goBackEvent = new EventEmitter<void>(); 
 
   searchTerm: string = ''; 
-  selectedItems: any[] = [];
-  selectedItem: any = null;
 
   filteredItems() {
     return this.items.filter(item =>
@@ -37,11 +38,10 @@ export class SelectComponent {
         ? this.selectedItems = this.selectedItems.filter(i => i !== item)
         : this.selectedItems.push(item);
     } else {
-      this.selectedItem = this.selectedItem === item ? null : item;
+      this.selectedItems = [item]; 
     }
-    this.selectedItemsChange.emit(this.isMultiple ? this.selectedItems : [this.selectedItem]);
+    this.selectedItemsChange.emit([...this.selectedItems]); 
   }
-  @Output() goBackEvent = new EventEmitter<void>(); 
 
   goBack(): void {
     this.goBackEvent.emit(); 

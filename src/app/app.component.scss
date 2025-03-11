@@ -1,3 +1,12 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    height: 100vh;
+}
 .title {
   margin-bottom: 22px;
   color: #fff;
@@ -25,6 +34,7 @@
     padding: 0 16px;
 }
 .footer {
+    margin: 0 16px;
     &__description {
     color: #fff;
     text-align: center;

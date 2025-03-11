@@ -1,12 +1,13 @@
 .tips-wrapper {
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: stretch;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: stretch;
 }
+
 .tips {
   border-radius: 13px;
   background: var(--color-dark);
@@ -20,4 +21,23 @@
   margin-bottom: 16px;
   padding: 4px 8px 4px 8px;
   white-space: nowrap;
+}
+
+.remove-tag {
+  display: inline-flex;
+  margin-left: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease; 
+
+  &:hover {
+    animation: rotateAnimation 1s infinite;
+  }
+}
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
