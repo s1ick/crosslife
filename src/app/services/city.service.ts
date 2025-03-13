@@ -1,21 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface City {
-  id: number;
-  name: string;
-}
+import { City } from '../models/city.model';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CityService {
-  private apiUrl = 'https://run.mocky.io/v3/f1b708f1-0162-4f9c-881f-002d35684cf5'; 
+  private apiUrl = environment.apiUrl;
+
+  cities = signal<City[]>([]); 
+  loading = signal<boolean>(false); 
+  error = signal<string | null>(null); 
 
   constructor(private http: HttpClient) {}
 
-  getCities(): Observable<{ data: City[] }> {
-    return this.http.get<{ data: City[] }>(this.apiUrl);
+  loadCities(): void {
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.http.get<{ data: City[] }>(this.apiUrl).subscribe({
+      next: (response) => {
+        this.cities.set(response.data); 
+        this.loading.set(false);
+      },
+      error: (err) => {
+        this.error.set('Ошибка загрузки городов');
+        this.loading.set(false);
+      },
+    });
   }
 }

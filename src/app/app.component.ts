@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CityService, City } from './services/city.service';
+import { Component, signal, computed, OnInit } from '@angular/core';
+import { CityService } from './services/city.service';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { ButtonsComponent } from './common-ui/buttons/buttons.component';
 import { SelectComponent } from './common-ui/select/select.component';
 import { TipsComponent } from './common-ui/tips/tips.component';
 import { CommonModule } from '@angular/common';
+import { City } from './models/city.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -15,101 +17,48 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  items: City[] = [];
-  isMultiple: boolean = false;
-  selectedItems: City[] = [];
-  selectedItem: City | null = null;
-  selectedRegions: { region1: City[]; region2: City[] } = { region1: [], region2: [] };
-  isSelectVisible: boolean = false;
-  isFirstRegionSelected: boolean = false;
-  isSecondRegionSelected: boolean = false;
+  items = this.cityService.cities;
+  isMultiple = signal<boolean>(false);
+  selectedRegions = signal<{ region1: City[]; region2: City[] }>({ region1: [], region2: [] });
+  isSelectVisible = signal(false);
+  selectedRegionType = signal<number | null>(null);
 
-  region1Tip: string[] = [];
-  region2Tip: string[] = [];
+  region1Tip = computed(() => this.selectedRegions().region1);
+  region2Tip = computed(() => this.selectedRegions().region2);
 
-  report: string = '';
+  isFirstRegionSelected = computed(() => this.selectedRegions().region1.length > 0);
+  isSecondRegionSelected = computed(() => this.selectedRegions().region2.length > 0);
+  isFormValid = computed(() => this.isFirstRegionSelected() && this.selectedRegions().region2.length > 0);
 
-  constructor(private cityService: CityService) {}
+  constructor(private cityService: CityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loadCities();
-  }
-
-  loadCities(): void {
-    this.cityService.getCities().subscribe((response) => {
-      this.items = response.data;
-    });
+    this.cityService.loadCities();
   }
 
   toggleSelectType(isMultiple: boolean, region: number): void {
-    this.isSelectVisible = true;
-    this.isMultiple = isMultiple;
-
-    if (region === 1) {
-      this.isFirstRegionSelected = true;
-    }
-
-    if (region === 2) {
-      this.isSecondRegionSelected = true;
-    }
+    this.isSelectVisible.set(true);
+    this.isMultiple.set(isMultiple);
+    this.selectedRegionType.set(region);
   }
 
   onSelectionChange(selectedItems: City[], region: number): void {
-    if (region === 1) {
-      this.selectedRegions.region1 = this.isMultiple
-        ? selectedItems
-        : selectedItems.slice(0, 1);
-    } else if (region === 2) {
-      this.selectedRegions.region2 = this.isMultiple
-        ? selectedItems
-        : selectedItems.slice(0, 1);
-    }
-    this.updateRegionTips(region);
-  }
-
-  updateRegionTips(region: number): void {
-    const selectedRegions =
-      region === 1
-        ? this.selectedRegions.region1
-        : this.selectedRegions.region2;
-    const tipArray = selectedRegions.map((item) => item.name);
-
-    if (region === 1) {
-      this.region1Tip = tipArray;
-    } else {
-      this.region2Tip = tipArray;
-    }
+    this.selectedRegions.update(regions => {
+      const key = region === 1 ? 'region1' : 'region2';
+      return { ...regions, [key]: this.isMultiple() ? selectedItems : selectedItems.slice(0, 1) };
+    });
   }
 
   onGoBack(): void {
-    this.isSelectVisible = false;
-    this.isFirstRegionSelected = false;
-    this.isSecondRegionSelected = false;
+    this.isSelectVisible.set(false);
+    this.selectedRegionType.set(null);
   }
 
-  removeTag(region: number, tag: string): void {
-    console.log(`Удаление тега: ${tag} из региона ${region}`);
-
-    if (region === 1) {
-      this.selectedRegions.region1 = this.selectedRegions.region1.filter(
-        (item) => item.name !== tag
-      );
-    } else {
-      this.selectedRegions.region2 = this.selectedRegions.region2.filter(
-        (item) => item.name !== tag
-      );
-    }
-
-    this.updateRegionTips(region);
-
-    console.log('Актуальные данные:', this.selectedRegions);
-  }
-
-  get isFormValid(): boolean {
-    return (
-      this.selectedRegions.region1.length >= 2 ||
-      this.selectedRegions.region2.length > 0
-    );
+  removeTag(region: number, tag: City): void {
+    this.selectedRegions.update(regions => {
+      const key = region === 1 ? 'region1' : 'region2';
+      return { ...regions, [key]: regions[key].filter(item => item.name !== tag.name) };
+    });
   }
 
   transliterate(text: string): string {
@@ -121,20 +70,17 @@ export class AppComponent implements OnInit {
       К: 'K', Л: 'L', М: 'M', Н: 'N', О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F',
       Х: 'Kh', Ц: 'Ts', Ч: 'Ch', Ш: 'Sh', Щ: 'Shch', Ы: 'Y', Э: 'E', Ю: 'Yu', Я: 'Ya'
     };
-    
-    return text.split('').map(char => translitMap[char] || char).join('');
+    return text.split('').map((char) => translitMap[char] || char).join('');
   }
 
   generateReport(): void {
-    const region1Names = this.selectedRegions.region1.map((city) => this.transliterate(city.name));
-    const region2Names = this.selectedRegions.region2.map((city) => this.transliterate(city.name));
+    const region1Names = this.selectedRegions().region1.map((city) => this.transliterate(city.name));
+    const region2Names = this.selectedRegions().region2.map((city) => this.transliterate(city.name));
 
     const doc = new jsPDF();
     autoTable(doc, {
       head: [['Region 1', 'Region 2']],
-      body: [
-        [region1Names.join(', '), region2Names.join(', ')],
-      ],
+      body: [[region1Names, region2Names]],
     });
 
     doc.save('report.pdf');

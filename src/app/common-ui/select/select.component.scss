@@ -11,6 +11,7 @@
 .select-component {
   padding: 16px 16px 16px 0;
   border-bottom: 0.5px solid rgb(75, 75, 75);
+  transition: background-color 0.2s ease;
 
   &__text {
     cursor: pointer;
@@ -21,6 +22,30 @@
     text-align: left;
     border: 0;
   }
+
+  &.cdk-drag-preview {
+    // Стили для элемента, который перетаскивается
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0.8;
+  }
+
+  &.cdk-drag-placeholder {
+    // Стили для плейсхолдера, который заменяет перетаскиваемый элемент
+    opacity: 0.3;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &.cdk-drag-animating {
+    // Стили для анимации перетаскивания
+    transition: transform 0.2s ease;
+  }
+}
+
+.cdk-drop-list-dragging .select-component:not(.cdk-drag-placeholder) {
+  // Стили для элементов списка во время перетаскивания
+  transition: transform 0.2s ease;
 }
 
 ::ng-deep {
@@ -44,6 +69,7 @@
   .mdc-form-field {
     width: 100%;
   }
+
   .mat-mdc-checkbox label {
     width: 100%;
   }
@@ -80,7 +106,6 @@
     line-height: 24px;
     line-height: 24px;
   }
-
 
   &.shift-left {
     animation: swipeOut 0.3s ease-out forwards;

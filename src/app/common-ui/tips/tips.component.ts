@@ -1,5 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { RegionDetailsModalComponent } from '../region-details-modal/region-details-modal.component';
+import { City } from '../../models/city.model'; // Импортируем интерфейс City
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-tips',
@@ -9,10 +12,22 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./tips.component.scss'],
 })
 export class TipsComponent {
-  @Input() tips: string[] = [];
-  @Output() removeTagEvent = new EventEmitter<string>();
+  @Input() tips: City[] = []; 
+  @Output() removeTagEvent = new EventEmitter<City>();
 
-  removeTag(tag: string): void {
+  constructor(private dialog: MatDialog) {}
+
+  openRegionDetailsModal(tip: City): void {
+    this.dialog.open(RegionDetailsModalComponent, {
+      height: '100%',
+      width: '100vw',
+      maxHeight: '100%',
+      maxWidth: '100vw',
+      data: tip,
+    });
+  }
+
+  removeTag(tag: City): void {
     this.removeTagEvent.emit(tag);
   }
 }

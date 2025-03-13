@@ -1,7 +1,9 @@
 <div class="title-select-component">
 	<mat-icon (click)="goBack()">keyboard_arrow_left</mat-icon>
 	<span class="title-select-component__text">Выбрать из списка</span>
-	<span *ngIf="selectedItems.length > 0" class="title-select-component__status" (click)="goBack()">Готово</span> 
+	@if(selectedItems.length > 0) {
+	<span class="title-select-component__status" (click)="goBack()">Готово</span> 
+}
 </div>
 
 <mat-form-field appearance="outline" class="search">
@@ -9,12 +11,14 @@
 	<input matInput type="text" placeholder="Поиск..." [(ngModel)]="searchTerm">
 </mat-form-field>
 
-<div class="select-component-list">
-	<mat-checkbox 
-	*ngFor="let item of filteredItems()" 
-	class="select-component"
-	[checked]="selectedItems.includes(item)" 
-	(change)="onItemSelect(item)">
-	<span class="select-component__text">{{ item.name }}</span>
-  </mat-checkbox>
-</div>
+<div cdkDropList (cdkDropListDropped)="drop($event)" class="select-component-list">
+	@for (item of filteredItems(); track item.id) {
+		<mat-checkbox 		
+		class="select-component"	  	
+		cdkDrag
+		[checked]="selectedItems.includes(item)" 
+		(change)="onItemSelect(item)">
+		<span class="select-component__text">{{ item.name }}</span>
+	  </mat-checkbox>
+	}
+</div> 

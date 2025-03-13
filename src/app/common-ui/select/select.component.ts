@@ -5,13 +5,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'select-component',
   standalone: true,
   imports: [
     FormsModule, CommonModule, MatCheckboxModule,
-    MatFormFieldModule, MatIconModule, MatInputModule
+    MatFormFieldModule, MatIconModule, MatInputModule,
+    CdkDrag, CdkDropList
   ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -45,5 +47,8 @@ export class SelectComponent {
 
   goBack(): void {
     this.goBackEvent.emit(); 
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 }
