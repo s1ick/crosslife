@@ -6,8 +6,6 @@
 <mat-dialog-content>
   <p><strong>Население:</strong> {{ data.population | number }}</p>
   <p><strong>Полное описание:</strong> {{ data.fullDescription }}</p>
-
-  <!-- Карта -->
   <app-leaflet-map [lat]="data.latitude" [lng]="data.longitude"></app-leaflet-map>
 </mat-dialog-content>
 </div>

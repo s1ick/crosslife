@@ -1,5 +1,5 @@
 <div class="layout">
-  <div class="title">Добавить отчет</div>
+  <h1 class="title">Добавить отчет</h1>
 
   @if (!isSelectVisible()) {
     <div class="description-select">*Выберите не менее двух регионов</div>
@@ -36,7 +36,10 @@
       }
     </div>
   }
-</div>
+  
+  @if ((region1Tip().length > 0 || region2Tip().length > 0) && !isSelectVisible()) {
+    <app-population-chart [region1Data]="region1Tip()" [region2Data]="region2Tip()"></app-population-chart>
+  }
 @if (!isSelectVisible()) {
 <footer class="footer">
   <div class="footer__description">Нужно заполнить поля отмеченные*</div>

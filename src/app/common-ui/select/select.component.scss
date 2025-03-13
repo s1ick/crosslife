@@ -24,7 +24,6 @@
   }
 
   &.cdk-drag-preview {
-    // Стили для элемента, который перетаскивается
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -32,19 +31,16 @@
   }
 
   &.cdk-drag-placeholder {
-    // Стили для плейсхолдера, который заменяет перетаскиваемый элемент
     opacity: 0.3;
     background-color: rgba(255, 255, 255, 0.05);
   }
 
   &.cdk-drag-animating {
-    // Стили для анимации перетаскивания
     transition: transform 0.2s ease;
   }
 }
 
 .cdk-drop-list-dragging .select-component:not(.cdk-drag-placeholder) {
-  // Стили для элементов списка во время перетаскивания
   transition: transform 0.2s ease;
 }
 

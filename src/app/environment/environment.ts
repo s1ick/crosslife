@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: 'https://run.mocky.io/v3/32cee321-d8da-46b5-ae28-77e21da9aaee',
+    apiUrl: 'https://run.mocky.io/v3/825cf091-6889-4e85-80f2-16153dd8d1ca',
   };

@@ -1,18 +1,20 @@
 import { Component, signal, computed, OnInit } from '@angular/core';
 import { CityService } from './services/city.service';
 import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import { ButtonsComponent } from './common-ui/buttons/buttons.component';
 import { SelectComponent } from './common-ui/select/select.component';
 import { TipsComponent } from './common-ui/tips/tips.component';
 import { CommonModule } from '@angular/common';
 import { City } from './models/city.model';
 import { MatDialog } from '@angular/material/dialog';
+import { PopulationChartComponent } from './common-ui/population-chart/population-chart.component';
+import html2canvas from 'html2canvas'; 
+import autoTable from 'jspdf-autotable'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ButtonsComponent, SelectComponent, TipsComponent],
+  imports: [CommonModule, ButtonsComponent, SelectComponent, TipsComponent, PopulationChartComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
@@ -73,16 +75,29 @@ export class AppComponent implements OnInit {
     return text.split('').map((char) => translitMap[char] || char).join('');
   }
 
-  generateReport(): void {
+  async generateReport(): Promise<void> {
     const region1Names = this.selectedRegions().region1.map((city) => this.transliterate(city.name));
     const region2Names = this.selectedRegions().region2.map((city) => this.transliterate(city.name));
-
+  
     const doc = new jsPDF();
+  
     autoTable(doc, {
       head: [['Region 1', 'Region 2']],
-      body: [[region1Names, region2Names]],
+      body: [[region1Names.join(', '), region2Names.join(', ')]],
     });
-
+  
+    const canvas = document.getElementById('populationChart') as HTMLCanvasElement;
+    if (canvas) {
+      const chartImage = await html2canvas(canvas); 
+      const imgData = chartImage.toDataURL('image/png');
+  
+      const imgProps = doc.getImageProperties(imgData);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 20; 
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+      doc.addImage(imgData, 'PNG', 10, (doc as any).lastAutoTable.finalY + 10, pdfWidth, pdfHeight);
+    }
+  
     doc.save('report.pdf');
   }
 }

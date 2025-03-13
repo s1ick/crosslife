@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'select-component',
@@ -18,22 +19,31 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent {
+export class SelectComponent implements OnInit {
   @Input() items: any[] = [];
   @Input() isMultiple: boolean = false;
-  @Input() selectedItems: any[] = []; 
+  @Input() selectedItems: any[] = [];
 
   @Output() selectedItemsChange = new EventEmitter<any[]>();
-  @Output() goBackEvent = new EventEmitter<void>(); 
+  @Output() goBackEvent = new EventEmitter<void>();
 
-  searchTerm: string = ''; 
+  searchTerm: string = '';
+  sortedItems = signal<any[]>([]);
+  userDefinedOrder = signal<number[]>([]); // Порядок, установленный пользователем
+
+  ngOnInit(): void {
+    const sorted = [...this.items].sort((a, b) => a.name.localeCompare(b.name));
+    this.sortedItems.set(sorted);
+    this.userDefinedOrder.set(sorted.map((_, index) => index)); // Инициализируем порядок
+  }
 
   filteredItems() {
-    return this.items
-      .filter(item =>
-        item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-      )
-      .sort((a, b) => a.name.localeCompare(b.name)); // Сортировка по алфавиту
+    const filtered = this.sortedItems().filter(item =>
+      item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    return this.userDefinedOrder()
+      .map(index => this.sortedItems()[index]) // Применяем порядок, установленный пользователем
+      .filter(item => filtered.includes(item)); // Фильтруем
   }
 
   onItemSelect(item: any) {
@@ -42,15 +52,18 @@ export class SelectComponent {
         ? this.selectedItems = this.selectedItems.filter(i => i !== item)
         : this.selectedItems.push(item);
     } else {
-      this.selectedItems = [item]; 
+      this.selectedItems = [item];
     }
-    this.selectedItemsChange.emit([...this.selectedItems]); 
+    this.selectedItemsChange.emit([...this.selectedItems]);
   }
 
   goBack(): void {
-    this.goBackEvent.emit(); 
+    this.goBackEvent.emit();
   }
+
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    const currentOrder = [...this.userDefinedOrder()];
+    moveItemInArray(currentOrder, event.previousIndex, event.currentIndex);
+    this.userDefinedOrder.set(currentOrder);
   }
 }
