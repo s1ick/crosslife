@@ -1,6 +1,6 @@
 <div class="tips-wrapper">
   <div class="tips" *ngFor="let tip of tips">
-    <span (click)="openRegionDetailsModal(tip)">{{ tip.name }}</span>
-    <span (click)="removeTag(tip)" class="remove-tag">✖</span>
+    <span (click)="openRegionDetailsModal(tip)" class="tips__text">{{ tip.name }}</span>
+    <span (click)="removeTag(tip)" class="remove-tag"><mat-icon>close</mat-icon></span>
   </div>
 </div>

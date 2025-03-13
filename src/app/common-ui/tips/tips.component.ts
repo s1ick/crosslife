@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { RegionDetailsModalComponent } from '../region-details-modal/region-details-modal.component';
 import { City } from '../../models/city.model'; // Импортируем интерфейс City
 import { CommonModule } from '@angular/common';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-tips',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './tips.component.html',
   styleUrls: ['./tips.component.scss'],
 })

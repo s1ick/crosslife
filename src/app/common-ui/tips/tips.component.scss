@@ -11,7 +11,6 @@
 .tips {
   border-radius: 13px;
   background: var(--color-dark);
-  color: #fff;
   font-size: var(--fsz-small);
   font-weight: var(--font-weight-normal);
   line-height: 18px;
@@ -21,13 +20,27 @@
   margin-bottom: 16px;
   padding: 4px 8px 4px 8px;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.3s ease, color 0.3s ease;
+    &:hover {
+      color: rgba($color: #fff, $alpha: 0.7);
+    }
+  }
 }
 
 .remove-tag {
   display: inline-flex;
   margin-left: 4px;
   cursor: pointer;
-  transition: transform 0.3s ease; 
+  color: var(--color-accent);
+  transition: transform 0.3s ease;
 
   &:hover {
     animation: rotateAnimation 1s infinite;

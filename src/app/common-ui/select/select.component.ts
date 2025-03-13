@@ -29,9 +29,11 @@ export class SelectComponent {
   searchTerm: string = ''; 
 
   filteredItems() {
-    return this.items.filter(item =>
-      item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    return this.items
+      .filter(item =>
+        item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      )
+      .sort((a, b) => a.name.localeCompare(b.name)); // Сортировка по алфавиту
   }
 
   onItemSelect(item: any) {
