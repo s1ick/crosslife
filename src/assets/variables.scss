@@ -5,7 +5,7 @@
     --color-gray: #9A9A9A;
     --color-muted: #808080;
     --color-accent: #DA7E3C;
-
+    --color-bg: #1e1e1e;
     // fonts
     --fsz-small: 13px;
     --fsz-medium: 15px;
@@ -13,7 +13,7 @@
     --font-family-primary: "SF Pro Display", sans-serif;
     --font-weight-normal: 400;
     --font-weight-bold: 600;
-
+    --mat-sidenav-content-background-color: var(--color-bg);
     --mdc-checkbox-selected-icon-color: var(--color-accent);
     --mdc-checkbox-selected-hover-icon-color: var(--color-accent);
     --mdc-checkbox-selected-focus-icon-color: var(--color-accent);

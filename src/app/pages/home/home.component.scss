@@ -1,0 +1,47 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+}
+.title {
+  margin-bottom: 22px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.4px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.letter {
+  display: inline-block;
+}
+
+.description-select {
+  color: #fff;
+  font-size: var( --fsz-large);
+  font-weight: var(--font-weight-bold);
+  line-height: 22px;
+  letter-spacing: -0.41px;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+
+
+.layout {
+    padding: 0 16px;
+}
+.footer {
+    &__description {
+    color: #fff;
+    text-align: center;
+    font-size: var( --fsz-large);
+    }
+}
