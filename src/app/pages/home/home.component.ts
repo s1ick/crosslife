@@ -7,13 +7,11 @@ import html2canvas from 'html2canvas';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 
-// Компоненты
 import { ButtonsComponent } from './../../common-ui/buttons/buttons.component';
 import { SelectComponent } from './../../common-ui/select/select.component';
 import { PopulationChartComponent } from './../../common-ui/population-chart/population-chart.component';
 import { TipsComponent } from './../../common-ui/tips/tips.component';
 
-// Сервисы и модели
 import { CityService } from './../../services/city.service';
 import { City } from '../../models/city.model';
 
@@ -58,17 +56,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   animateText(): void {
+    const pastelColors = [
+      '#A0A0A0', 
+      '#FFB6B6', 
+      '#C0C0C0', 
+      '#D3D3D3', 
+      '#DA7E3C', 
+      '#E0E0E0', 
+      '#FFFFFF', 
+    ];
+  
     gsap.fromTo('.letter', {
       opacity: 0,
       y: 20, 
-      color: '#ffffff',
+      color: '#ffffff', 
     }, {
       opacity: 1,
       y: 0, 
       duration: 1, 
       stagger: 0.1, 
       ease: 'power2.out', 
-      color: () => `hsl(${Math.random() * 360}, 100%, 50%)`, 
+      color: () => pastelColors[Math.floor(Math.random() * pastelColors.length)], // Случайный цвет из пастельной палитры
     });
   }
 
