@@ -1,10 +1,14 @@
 @import "reset-css/reset.css";
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 @import 'assets/variables.scss';  // Ваша палитра и переменные
-/* Убираем Material */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   margin: 0;
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-normal);
@@ -103,6 +107,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .mat-mdc-dialog-container.mdc-dialog {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Ограничиваем диалог по всему экрану */
 }
 .material-icons {
   font-size: 20px;
@@ -142,4 +150,38 @@ app-population-chart {
   transform: rotate(-90deg); // Поворот на 90 градусов
   transform-origin: left top; // Точка вращения
   white-space: nowrap; // Предотвращение переноса текста
+}
+.mat-sidenav-container {
+  display: flex;
+  flex-direction: row;
+  min-height: calc(100vh - 135px)
+}
+
+mat-list {
+  background-color: var(--color-background);  // фоновый цвет для списка
+  padding: 16px;
+}
+
+mat-list-item {
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: normal;
+  padding: 8px 16px;
+  color: #fff;
+  transition: background-color 0.3s;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  &.mat-list-item-selected {
+    color: var(--color-hover);
+  }
+}
+.mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
+  cursor: pointer !important;
+}
+
+.mat-divider {
+  margin: 16px 0 !important;
 }

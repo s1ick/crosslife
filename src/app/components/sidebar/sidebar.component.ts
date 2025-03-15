@@ -14,8 +14,7 @@ export class SidebarComponent {
   @Input() isExpanded: boolean = true; 
 
   menuItems = [
-    { icon: 'home', label: 'Home', route: '/home' },
-    { icon: 'contacts', label: 'Контакты', route: '/contacts' },
-    { icon: 'list', label: 'Формы', route: '/forms' },
+    { icon: 'home', label: 'На главную', route: '/home' },
+    { icon: 'location_city', label: 'Регионы', route: '/about' },
   ];
 }
