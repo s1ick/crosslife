@@ -185,3 +185,7 @@ mat-list-item {
 .mat-divider {
   margin: 16px 0 !important;
 }
+.leaflet-overlay-pane svg {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}

@@ -7,7 +7,7 @@ import html2canvas from 'html2canvas';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
 
-import { ButtonsComponent } from './../../common-ui/buttons/buttons.component';
+import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { SelectComponent } from './../../common-ui/select/select.component';
 import { PopulationChartComponent } from './../../common-ui/population-chart/population-chart.component';
 import { TipsComponent } from './../../common-ui/tips/tips.component';

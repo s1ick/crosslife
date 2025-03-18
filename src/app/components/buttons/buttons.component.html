@@ -1,0 +1,13 @@
+<button
+  [class]="typeButton"
+  [disabled]="disabled"
+  (click)="onClick()"
+  [attr.aria-label]="getAriaLabel()" 
+>
+  @if (icon) {
+    <mat-icon>{{ icon }}</mat-icon>
+  }
+  @if (textButtons) {
+    {{ textButtons }}
+  }
+</button>

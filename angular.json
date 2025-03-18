@@ -33,7 +33,6 @@
               "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-
             ],
             "scripts": []
           },
@@ -97,8 +96,29 @@
             ],
             "scripts": []
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "crossLife:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "crossLife:build",
+            "compodoc": false,
+            "outputDir": "storybook-static"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "ce45a438-924c-4f51-8378-19158ef63c67"
   }
 }

@@ -1,0 +1,10 @@
+{
+"/rss": {
+    "target": "https://news.yandex.ru",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/rss": ""
+    }
+  }
+  }

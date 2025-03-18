@@ -7,11 +7,19 @@ import { City } from '../../models/city.model';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { ButtonsComponent } from '../../components/buttons/buttons.component';
 
 @Component({
   selector: 'app-region-details-modal',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, LeafletMapComponent, CommonModule, MatIconModule],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    LeafletMapComponent,
+    CommonModule,
+    MatIconModule,
+    ButtonsComponent, 
+  ],
   templateUrl: './region-details-modal.component.html',
   styleUrls: ['./region-details-modal.component.scss'],
   animations: [
