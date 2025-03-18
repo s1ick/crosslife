@@ -2,7 +2,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; // Отступ между иконкой и текстом
+  gap: 8px; 
   border-radius: 10px;
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.12);
   padding: 10px 20px;
@@ -34,8 +34,8 @@ button {
   }
 
   &:disabled {
-    background: rgba(var(--color-accent), 0.5); // Полупрозрачный акцентный цвет
-    color: rgba(255, 255, 255, 0.5); // Полупрозрачный белый текст
+    background: rgba(var(--color-accent), 0.5); 
+    color: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -48,7 +48,7 @@ button {
   }
 
   &:disabled {
-    background: rgba(75, 75, 75, 0.5); // Полупрозрачный серый фон
-    color: rgba(var(--color-muted), 0.5); // Полупрозрачный текст
+    background: rgba(75, 75, 75, 0.5); 
+    color: rgba(var(--color-muted), 0.5); 
   }
 }

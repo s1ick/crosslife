@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RegionDetailsModalComponent } from '../region-details-modal/region-details-modal.component';
-import { City } from '../../models/city.model'; // Импортируем интерфейс City
+import { City } from '../../models/city.model'; 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 @Component({

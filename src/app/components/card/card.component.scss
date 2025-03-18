@@ -1,0 +1,64 @@
+.card {
+    background-color: var(--color-card-bg); // Используем переменную для фона
+    border-radius: 8px; // Закруглённые углы
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Тень
+    overflow: hidden; // Обрезаем содержимое, чтобы не выходило за границы
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-header {
+    background-color: var(--color-accent); // Цвет фона заголовка
+    color: var(--color-text-primary); // Цвет текста заголовка
+    padding: 16px; // Отступы внутри заголовка
+    border-radius: 8px 8px 0 0; // Закруглённые углы только сверху
+  
+    h2 {
+      font-size: 1.5rem; // Размер заголовка
+      font-weight: var(--font-weight-bold); // Жирный шрифт
+      margin: 0; // Убираем отступы
+    }
+  
+    p {
+      font-size: var(--fsz-medium); // Размер текста
+      color: var(--color-text-secondary); // Цвет текста
+      margin: 8px 0 0; // Отступы
+    }
+  }
+  
+  .card-content {
+    padding: 16px; // Отступы внутри контента
+    flex-grow: 1; // Растягиваем контент на всё доступное пространство
+  
+    h2 {
+      font-size: 1.25rem; // Размер заголовка
+      font-weight: var(--font-weight-bold); // Жирный шрифт
+      color: var(--color-accent); // Цвет заголовка
+      margin-top: 0; // Убираем отступ сверху
+    }
+  
+    ul {
+      list-style-type: disc; // Маркеры списка
+      padding-left: 24px; // Отступ для списка
+      margin: 16px 0; // Отступы списка
+  
+      li {
+        margin-bottom: 8px; // Отступ между элементами списка
+        font-size: var(--fsz-medium); // Размер текста
+        line-height: 1.5; // Высота строки
+      }
+    }
+  }
+  
+  .card-footer {
+    background-color: var(--color-card-bg); // Цвет фона футера
+    padding: 16px; // Отступы внутри футера
+    border-radius: 0 0 8px 8px; // Закруглённые углы только снизу
+    border-top: 1px solid var(--color-hover); // Граница сверху
+  
+    p {
+      font-size: var(--fsz-medium); // Размер текста
+      color: var(--color-text-secondary); // Цвет текста
+      margin: 0; // Убираем отступы
+    }
+  }

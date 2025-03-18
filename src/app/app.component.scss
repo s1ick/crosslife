@@ -1,4 +1,4 @@
-.example-container {
+.drawer-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -7,24 +7,25 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.example-sidenav {
-  width: 64px; 
+.drawer {
+  width: 64px;
   transition: width 0.3s ease-in-out;
+  background-color: rgba(var(--color-bg), 0.4);
 
-  &.mat-drawer-opened {
-    width: 240px; 
-    background-color: rgba(var(--color-bg), .4); 
+  &--opened {
+    width: 240px;
     box-shadow: 8px 0 20px rgba(0, 0, 0, 0.3);
   }
 }
 
-.example-sidenav-content {
+.drawer-content {
   padding: 20px;
+
+  &__inner {
+    padding: 20px;
+  }
 }
 
-.content {
-  padding: 20px;
-}
 mat-icon {
   color: #fff;
 }

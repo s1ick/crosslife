@@ -21,9 +21,9 @@ export default {
      * Тип кнопки, определяющий её стиль.
      * Может быть 'primary', 'secondary' или 'close'.
      * 
-     * @type {'primary' | 'secondary' | 'close'}
+     * @type {'primary' | 'secondary'}
      */
-    typeButton: { control: 'select', options: ['primary', 'secondary', 'close'] },
+    typeButton: { control: 'select', options: ['primary', 'secondary'] },
 
     /**
      * Определяет, будет ли кнопка отключена.

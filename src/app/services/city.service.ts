@@ -1,37 +1,29 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { City } from '../models/city.model';
-import { environment } from '../environment/environment';
-import { catchError, map, of } from 'rxjs';
+import * as data from './data.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CityService {
-  private apiUrl = environment.apiUrl;
+  private citiesData = (data as any).default.data;
 
-  cities = signal<City[]>([]); 
-  loading = signal<boolean>(false); 
-  error = signal<string | null>(null); 
+  cities = signal<City[]>([]);
+  loading = signal<boolean>(false);
+  error = signal<string | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   loadCities() {
-    this.loading.set(true);  
-    return this.http.get<{ data: City[] }>(this.apiUrl).pipe(
-      map(response => {
-        if (response && response.data) {
-          this.cities.set(response.data);
-        } else {
-          this.error.set('Ошибка загрузки городов');
-        }
-        this.loading.set(false); 
-      }),
-      catchError(err => {
-        this.error.set('Ошибка загрузки городов');
-        this.loading.set(false);  
-        return of([]);  
-      })
-    );
+    this.loading.set(true);
+    this.error.set(null);
+
+    try {
+      this.cities.set(this.citiesData);
+    } catch (err) {
+      this.error.set('Ошибка загрузки данных: ' + (err as Error).message);
+    } finally {
+      this.loading.set(false);
+    }
   }
 }

@@ -43,22 +43,22 @@
   @if (isSelectVisible()) {
     <div class="select-wrapper">
       @if (selectedRegionType() === 1) {
-        <select-component
+        <app-select
           [items]="items()"
           [isMultiple]="isMultiple()"
           [selectedItems]="selectedRegions().region1"
           (selectedItemsChange)="onSelectionChange($event, 1)"
           (goBackEvent)="onGoBack()">
-        </select-component>
+        </app-select>
       }
       @if (selectedRegionType() === 2) {
-        <select-component
+        <app-select
           [items]="items()"
           [isMultiple]="isMultiple()"
           [selectedItems]="selectedRegions().region2"
           (selectedItemsChange)="onSelectionChange($event, 2)"
           (goBackEvent)="onGoBack()">
-        </select-component>
+        </app-select>
       }
     </div>
   }

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ButtonsComponent } from './components/buttons/buttons.component'; // Импортируйте вашу кнопку
+import { SidebarComponent } from './common-ui/sidebar/sidebar.component';
+import { ButtonsComponent } from './components/buttons/buttons.component'; 
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ import { ButtonsComponent } from './components/buttons/buttons.component'; // И
     MatSidenavModule,
     MatIconModule,
     SidebarComponent,
-    ButtonsComponent, // Добавьте вашу кнопку сюда
+    ButtonsComponent, 
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

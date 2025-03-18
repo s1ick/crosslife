@@ -1,0 +1,19 @@
+<div class="search">
+  @if (prefixIcon) {
+    <span class="prefix-icon">
+      <mat-icon>{{ prefixIcon }}</mat-icon>
+    </span>
+  }
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="onInputChange($event)"
+  />
+  @if (suffixIcon) {
+    <span class="suffix-icon">
+      <mat-icon>{{ suffixIcon }}</mat-icon>
+    </span>
+  }
+</div>

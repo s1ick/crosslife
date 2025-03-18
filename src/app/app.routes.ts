@@ -3,6 +3,7 @@ import { AboutRegionsComponent } from './pages/about-regions/about-regions.compo
 import { Routes } from '@angular/router';
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: 'about', component: AboutRegionsComponent },
+    { path: 'regions', component: AboutRegionsComponent },
+    
     { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

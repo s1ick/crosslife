@@ -25,11 +25,12 @@ export class ButtonsComponent {
 
   /**
    * Тип кнопки, который определяет её стиль.
-   * Может быть 'primary', 'secondary' или 'close'.
+   * Может быть 'primary', 'secondary'.
    * 
-   * @type {'primary' | 'secondary' | 'close'}
+   * @type {'primary' | 'secondary' }
    */
-  @Input() typeButton: 'primary' | 'secondary' | 'close' = 'primary';
+  @Input()
+  typeButton!: 'primary' | 'secondary';
 
   /**
    * Состояние кнопки, включена ли она или заблокирована.

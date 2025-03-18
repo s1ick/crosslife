@@ -1,22 +1,15 @@
-<mat-drawer-container class="example-container" autosize>
-  <!-- Боковое меню -->
-  <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="isDrawerOpen">
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="drawer" mode="side" [(opened)]="isDrawerOpen">
     <app-sidebar></app-sidebar>
   </mat-drawer>
 
-  <!-- Основной контент -->
-  <div class="example-sidenav-content">
-    <!-- Ваша кастомная кнопка -->
+  <div class="drawer-content">
     <app-buttons
       [icon]="isDrawerOpen ? 'close' : 'menu'"
       (buttonClick)="toggleDrawer()"
     ></app-buttons>
-
-    <!-- Контент -->
-    <div class="content">
+    <div class="drawer-content__inner">
       <router-outlet></router-outlet>
     </div>
   </div>
 </mat-drawer-container>
-
-

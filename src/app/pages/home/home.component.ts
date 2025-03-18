@@ -1,4 +1,10 @@
-import { Component, signal, computed, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  signal,
+  computed,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { jsPDF } from 'jspdf';
@@ -40,14 +46,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   region1Tip = computed(() => this.selectedRegions().region1);
   region2Tip = computed(() => this.selectedRegions().region2);
-  isFirstRegionSelected = computed(() => this.selectedRegions().region1.length > 0);
-  isSecondRegionSelected = computed(() => this.selectedRegions().region2.length > 0);
-  isFormValid = computed(() => this.isFirstRegionSelected() && this.isSecondRegionSelected());
+  isFirstRegionSelected = computed(
+    () => this.selectedRegions().region1.length > 0
+  );
+  isSecondRegionSelected = computed(
+    () => this.selectedRegions().region2.length > 0
+  );
+  isFormValid = computed(
+    () => this.isFirstRegionSelected() && this.isSecondRegionSelected()
+  );
 
   constructor(private cityService: CityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.cityService.loadCities(); 
+    this.cityService.loadCities();
   }
 
   ngAfterViewInit(): void {
@@ -57,27 +69,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   animateText(): void {
     const pastelColors = [
-      '#A0A0A0', 
-      '#FFB6B6', 
-      '#C0C0C0', 
-      '#D3D3D3', 
-      '#DA7E3C', 
-      '#E0E0E0', 
-      '#FFFFFF', 
+      '#A0A0A0',
+      '#FFB6B6',
+      '#C0C0C0',
+      '#D3D3D3',
+      '#DA7E3C',
+      '#E0E0E0',
+      '#FFFFFF',
     ];
-  
-    gsap.fromTo('.letter', {
-      opacity: 0,
-      y: 20, 
-      color: '#ffffff', 
-    }, {
-      opacity: 1,
-      y: 0, 
-      duration: 1, 
-      stagger: 0.1, 
-      ease: 'power2.out', 
-      color: () => pastelColors[Math.floor(Math.random() * pastelColors.length)], // Случайный цвет из пастельной палитры
-    });
+
+    gsap.fromTo(
+      '.letter',
+      {
+        opacity: 0,
+        y: 20,
+        color: '#ffffff',
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: 'power2.out',
+        color: () =>
+          pastelColors[Math.floor(Math.random() * pastelColors.length)],
+      }
+    );
   }
 
   toggleSelectType(isMultiple: boolean, region: number): void {
@@ -91,7 +108,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const key = region === 1 ? 'region1' : 'region2';
       return {
         ...regions,
-        [key]: this.isMultiple() ? selectedItems : selectedItems.slice(0, 1), 
+        [key]: this.isMultiple() ? selectedItems : selectedItems.slice(0, 1),
       };
     });
   }
@@ -113,14 +130,73 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   transliterate(text: string): string {
     const translitMap: { [key: string]: string } = {
-      а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'yo', ж: 'zh', з: 'z', и: 'i', й: 'y',
-      к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f',
-      х: 'kh', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'shch', ы: 'y', э: 'e', ю: 'yu', я: 'ya',
-      А: 'A', Б: 'B', В: 'V', Г: 'G', Д: 'D', Е: 'E', Ё: 'Yo', Ж: 'Zh', З: 'Z', И: 'I', Й: 'Y',
-      К: 'K', Л: 'L', М: 'M', Н: 'N', О: 'O', П: 'P', Р: 'R', С: 'S', Т: 'T', У: 'U', Ф: 'F',
-      Х: 'Kh', Ц: 'Ts', Ч: 'Ch', Ш: 'Sh', Щ: 'Shch', Ы: 'Y', Э: 'E', Ю: 'Yu', Я: 'Ya',
+      а: 'a',
+      б: 'b',
+      в: 'v',
+      г: 'g',
+      д: 'd',
+      е: 'e',
+      ё: 'yo',
+      ж: 'zh',
+      з: 'z',
+      и: 'i',
+      й: 'y',
+      к: 'k',
+      л: 'l',
+      м: 'm',
+      н: 'n',
+      о: 'o',
+      п: 'p',
+      р: 'r',
+      с: 's',
+      т: 't',
+      у: 'u',
+      ф: 'f',
+      х: 'kh',
+      ц: 'ts',
+      ч: 'ch',
+      ш: 'sh',
+      щ: 'shch',
+      ы: 'y',
+      э: 'e',
+      ю: 'yu',
+      я: 'ya',
+      А: 'A',
+      Б: 'B',
+      В: 'V',
+      Г: 'G',
+      Д: 'D',
+      Е: 'E',
+      Ё: 'Yo',
+      Ж: 'Zh',
+      З: 'Z',
+      И: 'I',
+      Й: 'Y',
+      К: 'K',
+      Л: 'L',
+      М: 'M',
+      Н: 'N',
+      О: 'O',
+      П: 'P',
+      Р: 'R',
+      С: 'S',
+      Т: 'T',
+      У: 'U',
+      Ф: 'F',
+      Х: 'Kh',
+      Ц: 'Ts',
+      Ч: 'Ch',
+      Ш: 'Sh',
+      Щ: 'Shch',
+      Ы: 'Y',
+      Э: 'E',
+      Ю: 'Yu',
+      Я: 'Ya',
     };
-    return text.split('').map((char) => translitMap[char] || char).join('');
+    return text
+      .split('')
+      .map((char) => translitMap[char] || char)
+      .join('');
   }
 
   async generateReport(): Promise<void> {
@@ -130,13 +206,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       head: [['Region 1', 'Region 2']],
       body: [
         [
-          this.selectedRegions().region1.map((city) => this.transliterate(city.name)).join(', '),
-          this.selectedRegions().region2.map((city) => this.transliterate(city.name)).join(', '),
+          this.selectedRegions()
+            .region1.map((city) => this.transliterate(city.name))
+            .join(', '),
+          this.selectedRegions()
+            .region2.map((city) => this.transliterate(city.name))
+            .join(', '),
         ],
       ],
     });
 
-    const canvas = document.getElementById('populationChart') as HTMLCanvasElement;
+    const canvas = document.getElementById(
+      'populationChart'
+    ) as HTMLCanvasElement;
     if (canvas) {
       const chartImage = await html2canvas(canvas);
       const imgData = chartImage.toDataURL('image/png');
@@ -155,6 +237,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       );
     }
 
-    doc.save('report.pdf'); 
+    doc.save('report.pdf');
   }
 }

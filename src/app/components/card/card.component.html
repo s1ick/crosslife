@@ -1,0 +1,13 @@
+<div class="card" [class]="customClass">
+  <header class="card-header" *ngIf="hasHeaderContent">
+    <ng-content select="[card-header]"></ng-content>
+  </header>
+
+  <div class="card-content" *ngIf="hasContent">
+    <ng-content select="[card-content]"></ng-content>
+  </div>
+
+  <footer class="card-footer" *ngIf="hasFooterContent">
+    <ng-content select="[card-footer]"></ng-content>
+  </footer>
+</div>

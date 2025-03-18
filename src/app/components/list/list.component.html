@@ -1,0 +1,16 @@
+<div class="list">
+  @for (item of items; track item.route) {
+    <a
+      [routerLink]="item.route"
+      class="list-item"
+      (click)="onItemClick(item)"
+    >
+      <mat-icon class="list-item__icon">{{ item.icon }}</mat-icon>
+      @if (isExpanded) {
+        <span class="list-item__text">
+          {{ item.label || item.labelRoute }} 
+        </span>
+      }
+    </a>
+  }
+</div>

@@ -1,0 +1,7 @@
+<nav class="sidebar" [class.expanded]="isExpanded">
+  <app-list
+    [items]="menuItems"
+    [isExpanded]="isExpanded"
+    (itemClick)="onMenuItemClick($event)"
+  ></app-list>
+</nav>
