@@ -1,10 +1,11 @@
-<mat-drawer-container class="drawer-container" autosize>
-  <mat-drawer #drawer class="drawer" mode="side" [(opened)]="isDrawerOpen">
-    <app-sidebar></app-sidebar>
-  </mat-drawer>
+<div class="drawer-container">
+  <div class="drawer" [class.drawer-opened]="isDrawerOpen">
+    <app-sidebar [isExpanded]="isDrawerOpen"></app-sidebar>
+  </div>
 
   <div class="drawer-content">
     <app-buttons
+      class="toggle-menu"
       [icon]="isDrawerOpen ? 'close' : 'menu'"
       (buttonClick)="toggleDrawer()"
     ></app-buttons>
@@ -12,4 +13,4 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-</mat-drawer-container>
+</div>

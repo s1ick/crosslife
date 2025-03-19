@@ -1,5 +1,5 @@
-<mat-sidenav-container class="page">
-  <mat-sidenav mode="side" opened class="sidebar" position="end">
+<div class="page">
+  <div class="sidebar">
     <h3 class="sidebar__title">Выбор региона</h3>
     <app-list
       [items]="getListItems()"
@@ -7,13 +7,14 @@
       (itemClick)="selectRegion($event)"
       class="region-list"
     ></app-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="content">
+  </div>
+  <div class="page__content">
     <div *ngIf="regions.length === 0" class="loading-spinner">
-      <mat-spinner class="loading-spinner__spinner" color="accent"></mat-spinner>
+      <mat-spinner
+        class="loading-spinner__spinner"
+        color="accent"
+      ></mat-spinner>
     </div>
-
     <ng-container *ngIf="selectedCity">
       <app-card class="city-card">
         <div card-header #cardHeader class="city-card__header">
@@ -33,10 +34,13 @@
             />
             <div class="image-text__text">
               <p class="animated-text" @fadeInUp>
-                Добро пожаловать в {{ selectedCity.name }} – город, который не просто столица, а сердце страны. Здесь проживает
+                Добро пожаловать в {{ selectedCity.name }} – город, который не
+                просто столица, а сердце страны. Здесь проживает
                 <strong>{{ selectedCity.population | number }}</strong> человек.
               </p>
-              <p class="animated-text" @fadeInUp>{{ selectedCity.fullDescription }}</p>
+              <p class="animated-text" @fadeInUp>
+                {{ selectedCity.fullDescription }}
+              </p>
             </div>
           </div>
 
@@ -44,54 +48,58 @@
 
           <h2 class="animated-text" @fadeInUp>Образование</h2>
           @if (selectedCity.topEducationalInstitutions.length === 0) {
-            <div class="animated-text" @fadeInUp>
-              Информация об образовательных учреждениях отсутствует.
-            </div>
+          <div class="animated-text" @fadeInUp>
+            Информация об образовательных учреждениях отсутствует.
+          </div>
           } @else {
-            <ul>
-              @for (university of selectedCity.topEducationalInstitutions; track university.name) {
-                <li class="animated-text" @fadeInUp>
-                  <strong>{{ university.name }}</strong> – {{ university.description }}
-                </li>
-              }
-            </ul>
+          <ul>
+            @for (university of selectedCity.topEducationalInstitutions; track
+            university.name) {
+            <li class="animated-text" @fadeInUp>
+              <strong>{{ university.name }}</strong> –
+              {{ university.description }}
+            </li>
+            }
+          </ul>
           }
 
           <div class="divider"></div>
 
           <h2 class="animated-text" @fadeInUp>Интересные факты</h2>
           @if (selectedCity.funFacts.length === 0) {
-            <div class="animated-text" @fadeInUp>
-              Интересные факты о городе отсутствуют.
-            </div>
+          <div class="animated-text" @fadeInUp>
+            Интересные факты о городе отсутствуют.
+          </div>
           } @else {
-            <ul>
-              @for (fact of selectedCity.funFacts; track fact) {
-                <li class="animated-text" @fadeInUp>
-                  {{ fact }}
-                </li>
-              }
-            </ul>
+          <ul>
+            @for (fact of selectedCity.funFacts; track fact) {
+            <li class="animated-text" @fadeInUp>
+              {{ fact }}
+            </li>
+            }
+          </ul>
           }
 
           <div class="divider"></div>
 
           <h2 class="animated-text" @fadeInUp>Исторические события</h2>
           @if (selectedCity.keyHistoricalEvents.length === 0) {
-            <div class="animated-text" @fadeInUp>
-              Исторические события отсутствуют.
-            </div>
+          <div class="animated-text" @fadeInUp>
+            Исторические события отсутствуют.
+          </div>
           } @else {
-            <div>
-              @for (event of selectedCity.keyHistoricalEvents; track event.year) {
-                <div class="animated-text" @fadeInUp>
-                  <p><strong>{{ event.year }}:</strong> {{ event.event }}</p>
-                </div>
-              }
+          <div>
+            @for (event of selectedCity.keyHistoricalEvents; track event.year) {
+            <div class="animated-text" @fadeInUp>
+              <p>
+                <strong>{{ event.year }}:</strong> {{ event.event }}
+              </p>
             </div>
+            }
+          </div>
           }
         </div>
       </app-card>
     </ng-container>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

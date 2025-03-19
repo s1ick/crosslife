@@ -1,0 +1,6 @@
+<div class="custom-checkbox" (click)="toggle()">
+  <div class="checkbox-icon" [class.checked]="checked">
+    <mat-icon *ngIf="checked">check</mat-icon>
+  </div>
+  <ng-content *ngIf="label"></ng-content> 
+</div>

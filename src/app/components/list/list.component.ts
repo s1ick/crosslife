@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router'; 
-import { City,  MenuItem} from '../../models/city.model';
-
-export type ListItem = City | MenuItem;
+import { RouterModule } from '@angular/router';
+import { MenuItem } from '../../models/city.model';
 
 @Component({
   selector: 'app-list',

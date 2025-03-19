@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../../services/city.service';
 import { City, MenuItem } from '../../models/city.model';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -15,7 +14,6 @@ import { ListComponent } from '../../components/list/list.component';
   standalone: true,
   imports: [
     CommonModule,
-    MatSidenavModule,
     MatDividerModule,
     MatIconModule,
     MatProgressSpinnerModule,

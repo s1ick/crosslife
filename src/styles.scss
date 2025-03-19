@@ -1,11 +1,11 @@
 @import "reset-css/reset.css";
-@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-@import 'assets/variables.scss';
+@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
+@import "assets/variables.scss";
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 html,
@@ -14,10 +14,15 @@ body {
   margin: 0;
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-normal);
-  background: var(--color-background);
+  background: var(--color-bg);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: var(--font-weight-bold);
 }
 
@@ -93,10 +98,6 @@ app-population-chart {
   min-height: calc(100vh - 135px);
 }
 
-
-
-
-
 .mat-divider {
   margin: 16px 0 !important;
 }
@@ -104,4 +105,35 @@ app-population-chart {
 .leaflet-overlay-pane svg {
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+.custom-checkbox__label {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-size: var(--fsz-large);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: -0.4px;
+  text-align: left;
+  border: 0;
+}
+.mat-drawer-content {
+  height: inherit !important;
+}
+.drawer {
+  nav {
+    padding: 0 8px;
+  }
+  .list-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+  }
+}
+.toggle-menu {
+  button {
+    background: transparent;
+    color: #fff;
+  }
 }

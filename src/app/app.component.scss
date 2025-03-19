@@ -4,21 +4,23 @@
   bottom: 0;
   left: 0;
   right: 0;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
 }
 
 .drawer {
   width: 64px;
   transition: width 0.3s ease-in-out;
   background-color: rgba(var(--color-bg), 0.4);
+  overflow: hidden;
+  box-shadow: 8px 0 20px rgba(0, 0, 0, 0.3);
+}
 
-  &--opened {
-    width: 240px;
-    box-shadow: 8px 0 20px rgba(0, 0, 0, 0.3);
-  }
+.drawer-opened {
+  width: 160px;
 }
 
 .drawer-content {
+  flex: 1;
   padding: 20px;
 
   &__inner {

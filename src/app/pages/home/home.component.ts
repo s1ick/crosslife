@@ -12,12 +12,10 @@ import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { gsap } from 'gsap';
 import { TextPlugin } from 'gsap/TextPlugin';
-
 import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { SelectComponent } from './../../common-ui/select/select.component';
 import { PopulationChartComponent } from './../../common-ui/population-chart/population-chart.component';
 import { TipsComponent } from './../../common-ui/tips/tips.component';
-
 import { CityService } from './../../services/city.service';
 import { City } from '../../models/city.model';
 
@@ -97,15 +95,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     );
   }
 
-  toggleSelectType(isMultiple: boolean, region: number): void {
-    this.isSelectVisible.set(true);
-    this.isMultiple.set(isMultiple);
-    this.selectedRegionType.set(region);
-  }
-
-  onSelectionChange(selectedItems: City[], region: number): void {
+  onSelectionChange(selectedItems: City[], groupId: number): void {
     this.selectedRegions.update((regions) => {
-      const key = region === 1 ? 'region1' : 'region2';
+      const key = groupId === 1 ? 'region1' : 'region2';
       return {
         ...regions,
         [key]: this.isMultiple() ? selectedItems : selectedItems.slice(0, 1),
@@ -113,7 +105,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
+  toggleSelectType(isMultiple: boolean, region: number): void {
+    console.log('toggleSelectType', isMultiple, region);
+    this.isSelectVisible.set(true);
+    this.isMultiple.set(isMultiple);
+    this.selectedRegionType.set(region);
+  }
+  
   onGoBack(): void {
+    console.log('onGoBack');
     this.isSelectVisible.set(false);
     this.selectedRegionType.set(null);
   }

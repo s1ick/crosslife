@@ -1,81 +1,89 @@
 <div class="layout">
   @if (!isSelectVisible()) {
-    <h1 class="title">
-      <span class="letter">Д</span>
-      <span class="letter">о</span>
-      <span class="letter">б</span>
-      <span class="letter">а</span>
-      <span class="letter">в</span>
-      <span class="letter">и</span>
-      <span class="letter">т</span>
-      <span class="letter">ь</span>
-      <span class="letter">&nbsp;</span>
-      <span class="letter">о</span>
-      <span class="letter">т</span>
-      <span class="letter">ч</span>
-      <span class="letter">ё</span>
-      <span class="letter">т</span>
-    </h1>
-    <div class="description-select">*Выберите не менее двух регионов</div>
-    @if (region1Tip().length > 0) {
-      <div class="selected-tags">
-        <app-tips [tips]="region1Tip()" (removeTagEvent)="removeTag(1, $event)"></app-tips>
-      </div>
+  <h1 class="title">
+    <span class="letter">Д</span>
+    <span class="letter">о</span>
+    <span class="letter">б</span>
+    <span class="letter">а</span>
+    <span class="letter">в</span>
+    <span class="letter">и</span>
+    <span class="letter">т</span>
+    <span class="letter">ь</span>
+    <span class="letter">&nbsp;</span>
+    <span class="letter">о</span>
+    <span class="letter">т</span>
+    <span class="letter">ч</span>
+    <span class="letter">ё</span>
+    <span class="letter">т</span>
+  </h1>
+  <div class="description-select">*Выберите не менее двух регионов</div>
+  @if (region1Tip().length > 0) {
+  <div class="selected-tags">
+    <app-tips
+      [tips]="region1Tip()"
+      (removeTagEvent)="removeTag(1, $event)"
+    ></app-tips>
+  </div>
+  }
+  <app-buttons
+    textButtons="Выбрать"
+    typeButton="secondary"
+    (buttonClick)="toggleSelectType(true, 1)"
+  >
+  </app-buttons>
+  <div class="description-select">*Выберите один регион из списка</div>
+  @if (region2Tip().length > 0) {
+  <div class="selected-tags">
+    <app-tips
+      [tips]="region2Tip()"
+      (removeTagEvent)="removeTag(2, $event)"
+    ></app-tips>
+  </div>
+  }
+  <app-buttons
+    textButtons="Выбрать"
+    typeButton="secondary"
+    (buttonClick)="toggleSelectType(false, 2)"
+  >
+  </app-buttons>
+  } @if (isSelectVisible()) {
+  <div class="select-wrapper">
+    @if (selectedRegionType() === 1) {
+    <app-select
+      [items]="items()"
+      [isMultiple]="isMultiple()"
+      [selectedItems]="selectedRegions().region1"
+      (selectedItemsChange)="onSelectionChange($event, 1)"
+      (goBackEvent)="onGoBack()"
+    >
+    </app-select>
+    } @if (selectedRegionType() === 2) {
+    <app-select
+      [items]="items()"
+      [isMultiple]="isMultiple()"
+      [selectedItems]="selectedRegions().region2"
+      (selectedItemsChange)="onSelectionChange($event, 2)"
+      (goBackEvent)="onGoBack()"
+    >
+    </app-select>
     }
-    <app-buttons 
-      textButtons="Выбрать" 
-      typeButton="secondary" 
-      (buttonClick)="toggleSelectType(true, 1)">
+  </div>
+  } @if ((region1Tip().length > 0 || region2Tip().length > 0) &&
+  !isSelectVisible()) {
+  <app-population-chart
+    [region1Data]="region1Tip()"
+    [region2Data]="region2Tip()"
+  ></app-population-chart>
+  } @if (!isSelectVisible()) {
+  <footer class="footer">
+    <div class="footer__description">Нужно заполнить поля, отмеченные *</div>
+    <app-buttons
+      [disabled]="!isFormValid()"
+      typeButton="primary"
+      textButtons="Добавить отчет"
+      (buttonClick)="generateReport()"
+    >
     </app-buttons>
-    <div class="description-select">*Выберите один регион из списка</div>
-    @if (region2Tip().length > 0) {
-      <div class="selected-tags">
-        <app-tips [tips]="region2Tip()" (removeTagEvent)="removeTag(2, $event)"></app-tips>
-      </div>
-    }
-    <app-buttons 
-      textButtons="Выбрать" 
-      typeButton="secondary" 
-      (buttonClick)="toggleSelectType(false, 2)">
-    </app-buttons>
-  }
-
-  @if (isSelectVisible()) {
-    <div class="select-wrapper">
-      @if (selectedRegionType() === 1) {
-        <app-select
-          [items]="items()"
-          [isMultiple]="isMultiple()"
-          [selectedItems]="selectedRegions().region1"
-          (selectedItemsChange)="onSelectionChange($event, 1)"
-          (goBackEvent)="onGoBack()">
-        </app-select>
-      }
-      @if (selectedRegionType() === 2) {
-        <app-select
-          [items]="items()"
-          [isMultiple]="isMultiple()"
-          [selectedItems]="selectedRegions().region2"
-          (selectedItemsChange)="onSelectionChange($event, 2)"
-          (goBackEvent)="onGoBack()">
-        </app-select>
-      }
-    </div>
-  }
-
-  @if ((region1Tip().length > 0 || region2Tip().length > 0) && !isSelectVisible()) {
-    <app-population-chart [region1Data]="region1Tip()" [region2Data]="region2Tip()"></app-population-chart>
-  }
-
-  @if (!isSelectVisible()) {
-    <footer class="footer">
-      <div class="footer__description">Нужно заполнить поля, отмеченные *</div>
-      <app-buttons
-        [disabled]="!isFormValid()"
-        typeButton="primary"
-        textButtons="Добавить отчет"
-        (buttonClick)="generateReport()">
-      </app-buttons>
-    </footer>
+  </footer>
   }
 </div>

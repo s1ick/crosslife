@@ -1,26 +1,33 @@
 <div class="title-select-component">
-	<mat-icon (click)="goBack()">keyboard_arrow_left</mat-icon>
-	<span class="title-select-component__text">Выбрать из списка</span>
-	@if (selectedItems.length > 0) {
-	  <span class="title-select-component__status" (click)="goBack()">Готово</span>
-	}
-  </div>
-  
-  <app-input
+  <mat-icon (click)="goBack()">keyboard_arrow_left</mat-icon>
+  <span class="title-select-component__text">Выбрать из списка</span>
+  @if (selectedItems.length > 0) {
+  <span class="title-select-component__status" (click)="goBack()">Готово</span>
+  }
+</div>
+
+<app-input
   placeholder="Поиск..."
-	prefixIcon="search"
-	[(ngModel)]="searchTerm"
-  ></app-input>
-  
-  <div cdkDropList (cdkDropListDropped)="drop($event)" class="select-component-list">
-	@for (item of filteredItems(); track item.id) {
-	  <mat-checkbox
-		class="select-component"
-		cdkDrag
-		[checked]="selectedItems.includes(item)"
-		(change)="onItemSelect(item)"
-	  >
-		<span class="select-component__text">{{ item.name }}</span>
-	  </mat-checkbox>
-	}
+  prefixIcon="search"
+  [(ngModel)]="searchTerm"
+></app-input>
+
+<div
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  class="select-component-list"
+>
+@for (item of filteredItems(); track item.id) {
+  <div cdkDrag class="select-component">
+      <app-checkbox
+        [checked]="selectedItems.includes(item)"
+        (checkedChange)="onItemSelect(item, $event)"
+        [label]="true"
+      >
+        <span class="custom-checkbox__label">{{ item.name }}</span> <!-- Передаем текст -->
+      </app-checkbox>
   </div>
+  }
+</div>
+
+

@@ -1,19 +1,21 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { signal } from '@angular/core';
 import { InputComponent } from '../../components/input/input.component';
+import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { City } from '../../models/city.model';
+
+7
 
 @Component({
-  selector: 'app-select', // Изменил на app-select для лучшей практики
+  selector: 'app-select',
   standalone: true,
   imports: [
     FormsModule,
     CommonModule,
-    MatCheckboxModule,
+    CheckboxComponent,
     MatIconModule,
     CdkDrag,
     CdkDropList,
@@ -23,39 +25,47 @@ import { InputComponent } from '../../components/input/input.component';
   styleUrls: ['./select.component.scss'],
 })
 export class SelectComponent implements OnInit {
-  @Input() items: any[] = []; // Замените any на конкретный тип, например, Item[]
+  @Input() items: City[] = [];
   @Input() isMultiple: boolean = false;
-  @Input() selectedItems: any[] = []; // Замените any на конкретный тип
+  @Input() selectedItems: City[] = [];
 
-  @Output() selectedItemsChange = new EventEmitter<any[]>(); // Замените any на конкретный тип
+  @Output() selectedItemsChange = new EventEmitter<City[]>();
   @Output() goBackEvent = new EventEmitter<void>();
 
   searchTerm: string = '';
-  sortedItems = signal<any[]>([]); // Замените any на конкретный тип
-  userDefinedOrder = signal<number[]>([]); // Порядок, установленный пользователем
+  sortedItems = signal<City[]>([]);
+  userDefinedOrder = signal<number[]>([]);
 
   ngOnInit(): void {
-    const sorted = [...this.items].sort((a, b) => a.name.localeCompare(b.name));
-    this.sortedItems.set(sorted);
-    this.userDefinedOrder.set(sorted.map((_, index) => index)); // Инициализируем порядок
+    this.updateSortedItems();
   }
 
-  filteredItems() {
+  updateSortedItems(): void {
+    const sorted = [...this.items].sort((a, b) => a.name.localeCompare(b.name));
+    this.sortedItems.set(sorted);
+    this.userDefinedOrder.set(sorted.map((_, index) => index));
+  }
+  shouldShowLabel(item: City): boolean {
+    return !!item.name;
+  }
+  filteredItems(): City[] {
     const filtered = this.sortedItems().filter(item =>
       item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     return this.userDefinedOrder()
-      .map(index => this.sortedItems()[index]) // Применяем порядок, установленный пользователем
-      .filter(item => filtered.includes(item)); // Фильтруем
+      .map(index => this.sortedItems()[index])
+      .filter(item => filtered.includes(item));
   }
 
-  onItemSelect(item: any): void { // Замените any на конкретный тип
+  onItemSelect(item: any, isChecked: boolean): void {
     if (this.isMultiple) {
-      this.selectedItems.includes(item)
-        ? this.selectedItems = this.selectedItems.filter(i => i !== item)
-        : this.selectedItems.push(item);
+      if (isChecked) {
+        this.selectedItems.push(item);
+      } else {
+        this.selectedItems = this.selectedItems.filter(i => i !== item);
+      }
     } else {
-      this.selectedItems = [item];
+      this.selectedItems = isChecked ? [item] : [];
     }
     this.selectedItemsChange.emit([...this.selectedItems]);
   }

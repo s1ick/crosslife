@@ -7,8 +7,8 @@
     >
       <mat-icon class="list-item__icon">{{ item.icon }}</mat-icon>
       @if (isExpanded) {
-        <span class="list-item__text">
-          {{ item.label || item.labelRoute }} 
+        <span class="list-item__text" [@fadeText]="isExpanded ? 'visible' : 'hidden'">
+          {{ item.label || item.labelRoute }}
         </span>
       }
     </a>
