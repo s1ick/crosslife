@@ -12,11 +12,14 @@ import { MenuItem } from '../../models/city.model';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  @Input() items: MenuItem[] = [];
-  @Input() isExpanded: boolean = true;
-  @Output() itemClick = new EventEmitter<MenuItem>();
+  @Input() items: MenuItem[] = []; 
+  @Input() isExpanded: boolean = true; 
+  @Input() activeItem: MenuItem | null = null; 
+  @Output() itemClick = new EventEmitter<MenuItem>(); 
 
-  onItemClick(item: MenuItem): void {
-    this.itemClick.emit(item);
+
+  setActiveItem(item: MenuItem): void {
+    this.activeItem = item; 
+    this.itemClick.emit(item); 
   }
 }

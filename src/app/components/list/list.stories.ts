@@ -22,6 +22,7 @@ export const Default: Story = {
   args: {
     items: mockMenuItems, // Передаем моковые данные
     isExpanded: true, // Список развернут
+    activeItem: mockMenuItems[0], // Активный элемент
   },
 };
 
@@ -30,6 +31,7 @@ export const Collapsed: Story = {
   args: {
     items: mockMenuItems, // Передаем моковые данные
     isExpanded: false, // Список свернут
+    activeItem: mockMenuItems[1], // Активный элемент
   },
 };
 
@@ -38,6 +40,7 @@ export const SingleItem: Story = {
   args: {
     items: [mockMenuItems[0]], // Только один элемент
     isExpanded: true,
+    activeItem: mockMenuItems[0], // Активный элемент
   },
 };
 
@@ -51,6 +54,7 @@ export const LongList: Story = {
       { route: '/logout', labelRoute: 'Выйти', icon: 'logout' },
     ],
     isExpanded: true,
+    activeItem: mockMenuItems[2], // Активный элемент
   },
 };
 
@@ -59,5 +63,15 @@ export const DisabledItems: Story = {
   args: {
     items: mockMenuItems.map((item) => ({ ...item, disabled: true })), // Все элементы отключены
     isExpanded: true,
+    activeItem: null, // Нет активного элемента
+  },
+};
+
+// История для списка с активным элементом
+export const WithActiveItem: Story = {
+  args: {
+    items: mockMenuItems,
+    isExpanded: true,
+    activeItem: mockMenuItems[1], // Активный элемент
   },
 };

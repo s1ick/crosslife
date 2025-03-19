@@ -1,22 +1,32 @@
 .drawer-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
+  min-height: 100vh;
 }
-
+::ng-deep {
 .drawer {
   width: 64px;
+  margin-bottom: 40px;
+  min-width: 64px;
   transition: width 0.3s ease-in-out;
   background-color: rgba(var(--color-bg), 0.4);
   overflow: hidden;
   box-shadow: 8px 0 20px rgba(0, 0, 0, 0.3);
+  nav {
+    padding: 20PX 8px;
+  }
+  .list-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+  }
 }
-
+}
 .drawer-opened {
   width: 160px;
+  min-width: 160px;
 }
 
 .drawer-content {

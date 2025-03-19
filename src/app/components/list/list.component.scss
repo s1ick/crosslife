@@ -14,7 +14,9 @@
   text-decoration: none;
   color: var(--color-text-primary);
   transition: background-color 0.2s;
-
+  &.active {
+    color: var(--color-accent);
+  }
   &:hover {
     color: var(--color-accent);
   }

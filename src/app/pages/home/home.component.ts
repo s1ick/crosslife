@@ -18,6 +18,7 @@ import { PopulationChartComponent } from './../../common-ui/population-chart/pop
 import { TipsComponent } from './../../common-ui/tips/tips.component';
 import { CityService } from './../../services/city.service';
 import { City } from '../../models/city.model';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -28,11 +29,13 @@ import { City } from '../../models/city.model';
     PopulationChartComponent,
     SelectComponent,
     ButtonsComponent,
+    MatSpinner
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  constructor(public cityService: CityService) {}
   items = this.cityService.cities;
   isMultiple = signal<boolean>(false);
   selectedRegions = signal<{ region1: City[]; region2: City[] }>({
@@ -54,7 +57,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     () => this.isFirstRegionSelected() && this.isSecondRegionSelected()
   );
 
-  constructor(private cityService: CityService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.cityService.loadCities();

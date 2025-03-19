@@ -2,5 +2,7 @@
   <app-list
     [items]="menuItems"
     [isExpanded]="isExpanded"
+    [activeItem]="activeItem"
+    (itemClick)="onItemClick($event)" 
   ></app-list>
 </nav>

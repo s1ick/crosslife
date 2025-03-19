@@ -29,6 +29,8 @@ h6 {
 .select-wrapper {
   display: block;
   animation: swipeIn 0.3s ease-out;
+  background: var(--color-bg);
+
 }
 
 @keyframes swipeIn {
@@ -118,22 +120,26 @@ app-population-chart {
 .mat-drawer-content {
   height: inherit !important;
 }
-.drawer {
-  nav {
-    padding: 0 8px;
-  }
-  .list-item {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-  }
-}
+
 .toggle-menu {
   button {
     background: transparent;
     color: #fff;
+  }
+}
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Занимает всю высоту экрана */
+}
+
+.loading-spinner__spinner {
+  width: 50px;
+  height: 50px;
+}
+.active {
+  mat-icon {
+    color: var(--color-accent) !important;
   }
 }

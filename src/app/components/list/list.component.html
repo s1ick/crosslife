@@ -1,9 +1,10 @@
 <div class="list">
-  @for (item of items; track item.route) {
+  @for (item of items; track item.id) {
     <a
-      [routerLink]="item.route"
+      [routerLink]="item.route" 
       class="list-item"
-      (click)="onItemClick(item)"
+      [ngClass]="{ active: activeItem?.id === item.id }" 
+      (click)="setActiveItem(item)" 
     >
       <mat-icon class="list-item__icon">{{ item.icon }}</mat-icon>
       @if (isExpanded) {

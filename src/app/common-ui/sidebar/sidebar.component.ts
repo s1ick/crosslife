@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ListComponent } from '../../components/list/list.component';
 import { CommonModule } from '@angular/common';
 import { MenuItem } from '../../models/city.model';
@@ -22,13 +22,19 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ],
 })
-export class SidebarComponent {
-  @Input() isExpanded: boolean = true; // Добавляем @Input()
-
+export class SidebarComponent implements OnInit {
+  @Input() isExpanded: boolean = true; 
+  activeItem: MenuItem | null = null; 
   menuItems: MenuItem[] = [
-    { route: '/home', labelRoute: 'Главная', icon: 'home' },
-    { route: '/regions', labelRoute: 'Регионы', icon: 'location_city' },
+    { id: 1, route: '/home', labelRoute: 'Главная', icon: 'home' },
+    { id: 2, route: '/regions', labelRoute: 'Регионы', icon: 'location_city' },
   ];
-
+ngOnInit(): void {
+  this.activeItem = this.menuItems[0];
+}
+  onItemClick(item: MenuItem): void {
+    this.activeItem = item; 
+    console.log('Выбран элемент:', item);
+  }
 
 }

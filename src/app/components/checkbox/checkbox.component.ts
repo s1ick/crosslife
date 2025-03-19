@@ -12,11 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class CheckboxComponent {
   @Input() checked: boolean = false;
   @Output() checkedChange = new EventEmitter<boolean>();
-  @Input() label: boolean = true; // По умолчанию текст отображается
+  @Input() label: boolean = true; 
 
   toggle() {
     this.checked = !this.checked;
-    console.log('Checkbox toggled:', this.checked); // Отладка
+    console.log('Checkbox toggled:', this.checked); 
     this.checkedChange.emit(this.checked);
   }
 }

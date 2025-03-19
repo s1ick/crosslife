@@ -1,0 +1,18 @@
+<div class="list-section">
+  <h2 class="list-section__title list-section__animated-text" >
+    {{ title }}
+  </h2>
+  @if (items.length === 0) {
+    <div class="list-section__empty-message list-section__animated-text" >
+      Информация отсутствует.
+    </div>
+  } @else {
+    <ul class="list-section__list">
+      @for (item of items; track item) {
+        <li class="list-section__item list-section__animated-text" >
+          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+        </li>
+      }
+    </ul>
+  }
+</div>
