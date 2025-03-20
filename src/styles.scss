@@ -56,10 +56,11 @@ h6 {
   height: 20px;
 }
 
-#map {
-  border: 1px solid #ccc;
+.leaflet-container {
   border-radius: 4px;
   margin-top: 16px;
+  height: 300px;
+  width: 100%;
 }
 
 app-population-chart {

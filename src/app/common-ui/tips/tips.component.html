@@ -1,7 +1,7 @@
 <div class="tips-wrapper">
   @for (tip of tips; track tip.name) {
     <div class="tips">
-      <span (click)="openRegionDetailsModal(tip)" class="tips__text">{{ tip.name }}</span>
+      <span class="tips__text">{{ tip.name }}</span>
       <span (click)="removeTag(tip)" class="remove-tag"><mat-icon>close</mat-icon></span>
     </div>
   }

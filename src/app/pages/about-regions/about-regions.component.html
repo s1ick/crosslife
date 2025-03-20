@@ -48,31 +48,38 @@
               </div>
             </div>
 
+            <!-- Карта -->
+            <div class="map-container">
+              <app-leaflet-map
+                [lat]="selectedCity.latitude"
+                [lng]="selectedCity.longitude"
+              ></app-leaflet-map>
+            </div>
+
             <div class="divider"></div>
 
+            <!-- Секция "Образование" -->
+            <app-list-section
+              title="Образование"
+              [items]="selectedCity.topEducationalInstitutions || []"
+              [itemTemplate]="educationTemplate"
+            ></app-list-section>
+            <div class="divider"></div>
 
+            <!-- Секция "Интересные факты" -->
+            <app-list-section
+              title="Интересные факты"
+              [items]="selectedCity.funFacts || []"
+              [itemTemplate]="factTemplate"
+            ></app-list-section>
+            <div class="divider"></div>
 
-<app-list-section
-title="Образование"
-[items]="selectedCity.topEducationalInstitutions || []"
-[itemTemplate]="educationTemplate"
-></app-list-section>
-<div class="divider"></div>
-
-<!-- Секция "Интересные факты" -->
-<app-list-section
-title="Интересные факты"
-[items]="selectedCity.funFacts || []"
-[itemTemplate]="factTemplate"
-></app-list-section>
-<div class="divider"></div>
-
-<!-- Секция "Исторические события" -->
-<app-list-section
-title="Исторические события"
-[items]="selectedCity.keyHistoricalEvents || []"
-[itemTemplate]="historyTemplate"
-></app-list-section>
+            <!-- Секция "Исторические события" -->
+            <app-list-section
+              title="Исторические события"
+              [items]="selectedCity.keyHistoricalEvents || []"
+              [itemTemplate]="historyTemplate"
+            ></app-list-section>
           </div>
         </app-card>
       </ng-container>
