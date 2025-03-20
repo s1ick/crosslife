@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { City } from '../models/city.model';
+import { City } from '../src/app/models/city.model';
 import * as data from './data.json';
 
 @Injectable({

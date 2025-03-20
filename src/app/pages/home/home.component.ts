@@ -4,9 +4,9 @@ import {
   computed,
   OnInit,
   AfterViewInit,
+  Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
@@ -16,7 +16,7 @@ import { ButtonsComponent } from '../../components/buttons/buttons.component';
 import { SelectComponent } from './../../common-ui/select/select.component';
 import { PopulationChartComponent } from './../../common-ui/population-chart/population-chart.component';
 import { TipsComponent } from './../../common-ui/tips/tips.component';
-import { CityService } from './../../services/city.service';
+import { CityService } from '../../../../services/city.service';
 import { City } from '../../models/city.model';
 import { MatSpinner } from '@angular/material/progress-spinner';
 
@@ -29,14 +29,14 @@ import { MatSpinner } from '@angular/material/progress-spinner';
     PopulationChartComponent,
     SelectComponent,
     ButtonsComponent,
-    MatSpinner
+    MatSpinner,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  constructor(public cityService: CityService) {}
-  items = this.cityService.cities;
+  items: Signal<City[]>; // Объявляем свойство без инициализации
+
   isMultiple = signal<boolean>(false);
   selectedRegions = signal<{ region1: City[]; region2: City[] }>({
     region1: [],
@@ -57,6 +57,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     () => this.isFirstRegionSelected() && this.isSecondRegionSelected()
   );
 
+  constructor(public cityService: CityService) {
+    this.items = this.cityService.cities; // Инициализируем в конструкторе
+  }
 
   ngOnInit(): void {
     this.cityService.loadCities();
@@ -113,7 +116,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.isMultiple.set(isMultiple);
     this.selectedRegionType.set(region);
   }
-  
+
   onGoBack(): void {
     console.log('onGoBack');
     this.isSelectVisible.set(false);
